@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: AUTH
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/rentoome
+    username: postgres
+    password: megatim
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8777/eureka/
+
+server:
+  port: 8780
