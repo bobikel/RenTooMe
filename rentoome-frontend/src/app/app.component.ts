@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'rentoome-frontend';
 
   constructor(private primengConfig: PrimeNGConfig) {
-
+    this.primengConfig.ripple = true;
   }
 }
