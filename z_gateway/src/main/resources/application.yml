@@ -1,6 +1,17 @@
 spring:
   application:
     name: GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: AUTH
+          uri: http://localhost:8780/auth
+          predicates:
+            - Path=/api/v1/auths/**
+        - id: PROPERTY-SERVICE
+          uri: http://localhost:8785/PROPERTY-SERVICE
+          predicates:
+            - Path=/api/v1/properties/**
     
     # Discovery Server Access
 eureka:
