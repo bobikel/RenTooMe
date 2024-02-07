@@ -4,8 +4,8 @@
  */
 package com.rentoome.property.service;
 
-import com.rentoome.property.domain.Property;
-import com.rentoome.property.repository.PropertyRepository;
+import com.rentoome.property.domain.PropertyImage;
+import com.rentoome.property.repository.PropertyImageRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +16,18 @@ import org.springframework.stereotype.Service;
  * @author DYNABOOK
  */
 @Service
-public class PropertyService implements AbstractCRUDService<Property, Long> {
+public class PropertyImageService implements AbstractCRUDService<PropertyImage, Long> {
 
     @Autowired
-    private PropertyRepository repository;
+    private PropertyImageRepository repository;
 
     @Override
-    public Property add(Property entity) {
+    public PropertyImage add(PropertyImage entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Property edit(Property entity) {
+    public PropertyImage edit(PropertyImage entity) {
         return repository.save(entity);
     }
 
@@ -37,17 +37,17 @@ public class PropertyService implements AbstractCRUDService<Property, Long> {
     }
 
     @Override
-    public List<Property> findAll() {
+    public List<PropertyImage> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Property> findById(Long id) {
+    public Optional<PropertyImage> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Property> addAll(List<Property> entities) {
+    public List<PropertyImage> addAll(List<PropertyImage> entities) {
         return repository.saveAll(entities);
     }
 }

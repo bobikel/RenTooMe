@@ -4,13 +4,12 @@
  */
 package com.rentoome.property.controller;
 
-import com.rentoome.property.domain.Property;
-import com.rentoome.property.domain.dto.PropertyDto;
+import com.rentoome.property.domain.PropertyType;
+import com.rentoome.property.domain.dto.PropertyTypeDto;
 import com.rentoome.property.domain.mapper.MapStructMapper;
-import com.rentoome.property.service.PropertyService;
+import com.rentoome.property.service.PropertyTypeService;
 import com.rentoome.property.utils.CustomResponseHandler;
 import jakarta.validation.Valid;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +30,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author DYNABOOK
  */
 @RestController
-@RequestMapping("/api/v1/properties")
-public class PropertyController {
+@RequestMapping("/api/v1/tproperties")
+public class PropertyTypeController {
 
     @Autowired
-    private PropertyService service;
+    private PropertyTypeService service;
 
     private MapStructMapper mapstructMapper;
 
-    public PropertyController(MapStructMapper mapstructMapper, PropertyService service) {
+    public PropertyTypeController(MapStructMapper mapstructMapper, PropertyTypeService service) {
         this.mapstructMapper = mapstructMapper;
         this.service = service;
     }
@@ -55,20 +54,20 @@ public class PropertyController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody PropertyDto propertyDto) {
+    public ResponseEntity<?> add(@Valid @RequestBody PropertyTypeDto propertyDto) {
         try {
-            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.add(mapstructMapper.propertyDtoToproperty(propertyDto)));
-
+            System.out.println("ici l'enregistrement : " + mapstructMapper.propertyTypeDtoTopropertyType(propertyDto));
+            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.add(mapstructMapper.propertyTypeDtoTopropertyType(propertyDto)));
         } catch (Exception e) {
             return CustomResponseHandler.generateResponse(e.getMessage(), HttpStatus.CONFLICT, null);
         }
     }
 
     @PostMapping("/addlist")
-    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyDto> propertyDtos) throws IOException {
+    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyTypeDto> propertyTypeDtos) {
         try {
-            if (!propertyDtos.isEmpty()) {
-                return CustomResponseHandler.generateResponse("Successfully saved the list!", HttpStatus.CREATED, service.addAll(mapstructMapper.propertiesDtoToproperties(propertyDtos)));
+            if (!propertyTypeDtos.isEmpty()) {
+                return CustomResponseHandler.generateResponse("Successfully saved the list!", HttpStatus.CREATED, service.addAll(mapstructMapper.propertyTypesDtoTopropertyTypes(propertyTypeDtos)));
             } else {
                 return CustomResponseHandler.generateResponse("Error!!!", HttpStatus.NO_CONTENT, null);
             }
@@ -78,18 +77,18 @@ public class PropertyController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> edit(@Valid @RequestBody PropertyDto propertyDto, @PathVariable Long id) {
-        Optional<Property> property = service.findById(id);
+    public ResponseEntity<?> edit(@Valid @RequestBody PropertyTypeDto propertyDto, @PathVariable Long id) {
+        Optional<PropertyType> property = service.findById(id);
         if (!property.isPresent()) {
             return CustomResponseHandler.generateResponse("entity not found", HttpStatus.NOT_FOUND, null);
         } else {
-            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.edit(mapstructMapper.propertyDtoToproperty(propertyDto)));
+            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.edit(mapstructMapper.propertyTypeDtoTopropertyType(propertyDto)));
         }
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<Property> property = service.findById(id);
+        Optional<PropertyType> property = service.findById(id);
         if (!property.isPresent()) {
             return CustomResponseHandler.generateResponse("entity not found", HttpStatus.NOT_FOUND, null);
         } else {

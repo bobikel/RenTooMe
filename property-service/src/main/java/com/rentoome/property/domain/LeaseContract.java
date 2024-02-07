@@ -5,12 +5,15 @@
 package com.rentoome.property.domain;
 
 import com.rentoome.property.domain.enums.LeaseStatut;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -36,15 +39,16 @@ public class LeaseContract {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @OneToOne(targetEntity = Property.class)
+
+    @OneToOne(targetEntity = Property.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Property property;
-    
+
     private Long userId;
-    
-    private LocalDate dateDebutBail;
-    
+
+    private LocalDate startRentDate;
+
     private LocalDate rentDuration;
-    
-    private LeaseStatut leaseStatut; 
+
+    @Enumerated(EnumType.STRING)
+    private LeaseStatut leaseStatut;
 }

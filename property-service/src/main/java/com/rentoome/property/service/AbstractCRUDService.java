@@ -31,5 +31,5 @@ public abstract interface AbstractCRUDService<T extends Object, ID> {
 
     public Optional<T> findById(Long id);
 
-    public List<Property> addCity(List<Property> entities);
+    public List<T> addAll(List<T> entities);
 }

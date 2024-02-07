@@ -5,10 +5,12 @@
 package com.rentoome.property.domain;
 
 import com.rentoome.property.domain.enums.OccupationStatut;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,12 +42,12 @@ public class PropertyImage extends AbstractEntity {
     private String libelle;
 
     private String alternativeText;
-    
+
     private String legend;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Property.class, cascade = CascadeType.ALL)
     private Property property;
-    
+
     private String url;
 
 }

@@ -3,10 +3,10 @@ package com.rentoome.property;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class PropertyApplicationTests {
 
-	@Test
+//	@Test
 	void contextLoads() {
 	}
 

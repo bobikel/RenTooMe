@@ -5,15 +5,21 @@
 package com.rentoome.property.domain;
 
 import com.rentoome.property.domain.enums.OccupationStatut;
+import com.rentoome.property.domain.enums.PaymentFrequency;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,16 +43,16 @@ public class RentRate extends AbstractEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String libelle;
-
-    private String description;
-
-    private String adresse;
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = Property.class, cascade = CascadeType.ALL)
+    private Property property;
 
     @Enumerated(EnumType.STRING)
-    private OccupationStatut occupationStatut;
+    private PaymentFrequency paymentFrequency;
 
-    @ManyToOne
-    private PropertyType propertyType;
+    private LocalDateTime startedValidity;
+
+    private LocalDateTime endValidity;
+
+    private BigDecimal amount;
 
 }

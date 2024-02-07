@@ -17,8 +17,13 @@ spring:
       
   springdoc:
     api-docs:
+        enabled: true
         path: /api-docs
-
+    swagger-ui:
+        path: /swagger-ui.html
+        enabled: true
+    use-management-port: true
+    show-actuator: true
 
 # Discovery Server Access
 eureka:
