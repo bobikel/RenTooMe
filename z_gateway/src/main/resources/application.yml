@@ -11,7 +11,7 @@ spring:
         - id: PROPERTY-SERVICE
           uri: http://localhost:8785/PROPERTY-SERVICE
           predicates:
-            - Path=/api/v1/properties/**
+            - Path=/api/v1/property-service/**    
     
     # Discovery Server Access
 eureka:
