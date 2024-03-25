@@ -4,14 +4,9 @@
  */
 package com.rentoome.property.service;
 
-import com.netflix.discovery.converters.Auto;
-import com.rentoome.property.domain.Property;
 import java.util.List;
 import java.util.Optional;
-import org.hibernate.query.Page;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.domain.Page;
 
 /**
  *
@@ -32,4 +27,6 @@ public abstract interface AbstractCRUDService<T extends Object, ID> {
     public Optional<T> findById(Long id);
 
     public List<T> addAll(List<T> entities);
+
+    public Page<T> getAllPageable();
 }

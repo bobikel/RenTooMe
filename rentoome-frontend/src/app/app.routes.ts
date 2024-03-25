@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { GetallComponent } from './core/components/propertyTypes/getall/getall.component';
 import { ListComponent } from './core/components/properties/list/list.component';
-import { DashboardComponent } from './layout/admin/dashboard/dashboard.component';
+import { AddComponent } from './core/components/properties/add/add.component';
 
 export const routes: Routes = [
     {
@@ -14,7 +14,7 @@ export const routes: Routes = [
         component: ListComponent
     },
     {
-        path: "dashboard",
-        component: DashboardComponent
+        path: 'add',
+        component: AddComponent
     }
 ];

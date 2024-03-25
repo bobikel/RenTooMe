@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PropertyTypesService } from '../../../services/propertyTypes/propertyTypes.service';
 import { IPropertyType } from '../../../interfaces/propertyType/i-property-type';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -15,6 +15,10 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationService } from '../../../services/notifications/notifications.service';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { ListDataSource, ListItem } from '../../properties/list/list-datasource';
 
 @Component({
   selector: 'app-getall',
@@ -28,12 +32,31 @@ import { NotificationService } from '../../../services/notifications/notificatio
     MatIconModule,
     AsyncPipe,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   templateUrl: './getall.component.html',
   styleUrl: './getall.component.scss'
 })
 export class GetallComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatTable) table!: MatTable<ListItem>;
+  dataSource = new ListDataSource();
+
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['id', 'name'];
+
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.table.dataSource = this.dataSource;
+  }
+
+
   ipropertyType: IPropertyType | undefined;
   headers: string[] = [];
 

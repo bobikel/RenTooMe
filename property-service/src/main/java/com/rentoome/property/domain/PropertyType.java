@@ -4,6 +4,7 @@
  */
 package com.rentoome.property.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
@@ -31,9 +32,13 @@ public class PropertyType extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty
     private Long id;
 
+    @JsonProperty
     private String libelle;
 
+    @JsonProperty
     private String description;
+
 }

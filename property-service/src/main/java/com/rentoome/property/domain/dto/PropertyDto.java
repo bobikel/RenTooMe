@@ -29,6 +29,8 @@ public class PropertyDto {
     private String occupationStatut;
 
     @NonNull
-    private PropertyTypeDto propertyTypeDto;
+    private Long propertyTypeId;
 
+//    @NonNull
+//    private PropertyTypeDto propertyTypeDto;
 }

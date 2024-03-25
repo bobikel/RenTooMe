@@ -13,5 +13,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>,
 
     Optional<Utilisateur> findByUsername(String username);
 
-    Optional<Utilisateur> findByUsernameAndPassword (String username, String password);
+    Optional<Utilisateur> findByUsernameAndPassword(String username, String password);
+
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }

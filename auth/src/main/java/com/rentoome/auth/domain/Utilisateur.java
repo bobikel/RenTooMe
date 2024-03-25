@@ -1,5 +1,6 @@
 package com.rentoome.auth.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Set;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table
@@ -18,7 +20,7 @@ import lombok.AllArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Utilisateur extends AbstractEntity {
+public class Utilisateur extends AbstractEntity implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,12 +37,13 @@ public class Utilisateur extends AbstractEntity {
     private String email;
 
     @NotNull(message = "Mot de passe requis")
+    @JsonIgnore
     private String password;
 
     private String sex;
 
     private boolean expired;
-    
+
     private boolean accountexpired;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -67,5 +70,10 @@ public class Utilisateur extends AbstractEntity {
     @Override
     public int hashCode() {
         return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

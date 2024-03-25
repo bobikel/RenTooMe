@@ -28,3 +28,19 @@ eureka:
 
 server:
   port: 8780
+
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+#    org.springframework.boot.autoconfigure: DEBUG
+
+auth:
+    app:
+        jwtSecret: ======================BezKoder=Spring===========================
+        jwtExpirationMs: 86400000

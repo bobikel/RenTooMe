@@ -9,6 +9,10 @@ import com.rentoome.property.repository.PropertyImageRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -49,5 +53,28 @@ public class PropertyImageService implements AbstractCRUDService<PropertyImage, 
     @Override
     public List<PropertyImage> addAll(List<PropertyImage> entities) {
         return repository.saveAll(entities);
+    }
+
+    /**
+     *
+     * @param page
+     * @param size
+     * @return
+     */
+    @Override
+    public Page<PropertyImage> getAllPageable() {
+
+//        Pageable pageRequest = createPageRequestUsing(page, size);
+
+        List<PropertyImage> allPropertyImages = repository.findAll();
+//        int start = (int) pageRequest.getOffset();
+//        int end = Math.min((start + pageRequest.getPageSize()), allPropertyImages.size());
+
+//        List<PropertyImage> pageContent = allPropertyImages.subList(start, end);
+        return new PageImpl<>(allPropertyImages);
+    }
+
+    private Pageable createPageRequestUsing(int page, int size) {
+        return PageRequest.of(page, size);
     }
 }
