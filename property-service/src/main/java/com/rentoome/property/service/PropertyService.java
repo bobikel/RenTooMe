@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -57,14 +56,14 @@ public class PropertyService implements AbstractCRUDService<Property, Long> {
     }
 
     @Override
-//    public Page<Property> getAllPageable(int page, int size) {
     public Page<Property> getAllPageable() {
+//    public Page<Property> getAllPageable() {
 
 //        Pageable pageRequest = createPageRequestUsing(page, size);
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
         Page<Property> allPropertys = repository.findAll(Pageable.unpaged(sort));
 //        int start = (int) pageRequest.getOffset();
-//        int end = Math.min((start + pageRequest.getPageSize()), allPropertys.size());
+//        int end = Math.min((start + pageRequest.getPageSize()), allPropertys);
 
 //        List<Property> pageContent = allPropertys.subList(start, end);
         return allPropertys;

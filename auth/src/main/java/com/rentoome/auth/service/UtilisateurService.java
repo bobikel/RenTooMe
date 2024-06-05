@@ -29,7 +29,7 @@ public class UtilisateurService implements UserDetailsService {
 
     public UtilisateurService(UtilisateurRepository repository, RoleRepository rRepository) {
         this.repository = repository;
-        this.repository = repository;
+        this.rRepository = rRepository;
     }
 
     public Utilisateur add(Utilisateur entity) {

@@ -55,12 +55,13 @@ public class PropertyController {
 
     @GetMapping("")
     public ResponseEntity<?> rettrieveAll() {
-        try {
-            return CustomResponseHandler.generateResponse("Successfully retrieve data!", HttpStatus.OK, service.findAll());
+        List<Property> properties = service.findAll();
+        if (!properties.isEmpty()) {
+            return CustomResponseHandler.generateResponse("Successfully retrieve data!", HttpStatus.OK, properties);
+        } else {
+            return CustomResponseHandler.generateResponse("Successfully retrieve data!", HttpStatus.OK, properties);
+        }   
 
-        } catch (Exception e) {
-            return CustomResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
-        }
     }
 
     @PostMapping("/add")
@@ -132,7 +133,6 @@ public class PropertyController {
 //        return ResponseEntity.ok()
 //                .headers(headers)
 //                .body(pageRquest);
-
 //        return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.edit(mapstructMapper.propertyDtoToproperty(propertyDto)));
         return CustomResponseHandler.generateResponse("Successfully retrieve data!", HttpStatus.OK, service.getAllPageable());
 

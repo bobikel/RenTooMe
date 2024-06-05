@@ -61,7 +61,6 @@ public class AuthenticateController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        System.out.println("on entre dans le auth avec le login ci :" + loginRequest.getPassword() + " " + loginRequest.getUsername());
         try {
             System.out.println("l'authentification");
 

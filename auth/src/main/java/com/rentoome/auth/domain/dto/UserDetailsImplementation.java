@@ -33,11 +33,10 @@ public class UserDetailsImplementation implements UserDetails {
 
         for (Role role : roles) {
             // Ajouter le rôle lui-même en tant qu'autorité
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
 
             // Ajouter les privilèges du rôle en tant qu'autorités
-            Set<Privilege> privileges = role.getPrivileges();
-            for (Privilege privilege : privileges) {
+            for (Privilege privilege : role.getPrivileges()) {
                 authorities.add(new SimpleGrantedAuthority(privilege.getName()));
             }
         }
@@ -74,12 +73,12 @@ public class UserDetailsImplementation implements UserDetails {
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;  
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;  
+        return true;
     }
 
 }

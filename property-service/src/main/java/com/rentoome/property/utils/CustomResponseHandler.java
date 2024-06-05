@@ -22,7 +22,7 @@ public class CustomResponseHandler {
         map.put("status", status.value());
         map.put("data", responseObj);
 
-        return new ResponseEntity<Object>(map, status);
+        return new ResponseEntity<>(map, status);
     }
 
     public static ResponseEntity<?> generateResponse(String message, HttpStatus status, HttpHeaders headers,

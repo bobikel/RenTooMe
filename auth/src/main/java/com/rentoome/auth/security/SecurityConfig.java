@@ -64,7 +64,7 @@ public class SecurityConfig {
                 );
 
         http.authenticationProvider(authenticationProvider());
-        http.csrf((csrf) -> csrf.ignoringRequestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**"));
+//        http.csrf((csrf) -> csrf.ignoringRequestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**"));
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
