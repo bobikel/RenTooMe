@@ -1,0 +1,14 @@
+footer {
+    padding-top: 10px 0;
+    background-color: black;
+    color: white;
+    height: 18vh;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    text-justify: auto;
+    color: white;
+    padding-top: 40px;
+}

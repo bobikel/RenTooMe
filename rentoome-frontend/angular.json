@@ -9,10 +9,21 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr": "src/locale/messages.fr.xlf",
+          "en": "src/locale/messages.en.xlf",
+          "es": "src/locale/messages.es.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": true,
+            "aot": true,
+            "i18nMissingTranslation": "error",
             "outputPath": "dist/rentoome-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -96,5 +107,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b6c11fae-9992-4743-b8e2-8e6a276b1ae8"
   }
 }

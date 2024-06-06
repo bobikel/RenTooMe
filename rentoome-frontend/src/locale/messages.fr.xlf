@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:xliff xmlns:ns0="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <ns0:file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <ns0:body>
+      <ns0:trans-unit id="4031065083141903665" datatype="html">
+        <ns0:source>Page not found</ns0:source>
+        <ns0:target>Page non trouvé</ns0:target>
+        <ns0:context-group purpose="location">
+          <ns0:context context-type="sourcefile">src/app/core/components/404/notfound.component.html</ns0:context>
+          <ns0:context context-type="linenumber">12,13</ns0:context>
+        </ns0:context-group>
+        <ns0:note priority="1" from="description"> Resource not found</ns0:note>
+        <ns0:note priority="1" from="meaning">Site Content </ns0:note>
+      </ns0:trans-unit>
+      <ns0:trans-unit id="5017959528784503477" datatype="html">
+        <ns0:source>Sorry, we couldn’t find the page you’re looking for.</ns0:source>
+        <ns0:context-group purpose="location">
+          <ns0:context context-type="sourcefile">src/app/core/components/404/notfound.component.html</ns0:context>
+          <ns0:context context-type="linenumber">13,14</ns0:context>
+        </ns0:context-group>
+      <target>Désolé, nous n'avons pas pu trouver la page que vous cherchez.</target></ns0:trans-unit>
+      <ns0:trans-unit id="6266867565509022026" datatype="html">
+        <ns0:source>Go back home</ns0:source>
+        <ns0:context-group purpose="location">
+          <ns0:context context-type="sourcefile">src/app/core/components/404/notfound.component.html</ns0:context>
+          <ns0:context context-type="linenumber">17</ns0:context>
+        </ns0:context-group>
+      <target>Retourner à l'accueil</target></ns0:trans-unit>
+      <ns0:trans-unit id="4906622490025574570" datatype="html">
+        <ns0:source>Contact support <ns0:x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span                     aria-hidden=&quot;true&quot;&gt;" />→<ns0:x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;" /></ns0:source>
+        <ns0:context-group purpose="location">
+          <ns0:context context-type="sourcefile">src/app/core/components/404/notfound.component.html</ns0:context>
+          <ns0:context context-type="linenumber">18,20</ns0:context>
+        </ns0:context-group>
+        <ns0:note priority="1" from="description"> Contact support</ns0:note>
+        <ns0:note priority="1" from="meaning">Site Content </ns0:note>
+      <target>Contactez le support </target></ns0:trans-unit>
+    </ns0:body>
+  </ns0:file>
+</ns0:xliff>
