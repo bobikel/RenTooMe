@@ -5,7 +5,7 @@
 package com.rentoome.property.controller;
 
 import com.rentoome.property.domain.PropertyImage;
-import com.rentoome.property.domain.dto.PropertyImageDto;
+import com.rentoome.property.domain.dto.PropertyImageDTO;
 import com.rentoome.property.domain.mapper.MapStructMapper;
 import com.rentoome.property.service.PropertyImageService;
 import com.rentoome.property.utils.CustomResponseHandler;
@@ -56,7 +56,7 @@ public class PropertyImageController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody PropertyImageDto propertyDto) {
+    public ResponseEntity<?> add(@Valid @RequestBody PropertyImageDTO propertyDto) {
         try {
             return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.add(mapstructMapper.propertyImageDtoTopropertyImage(propertyDto)));
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class PropertyImageController {
     }
 
     @PostMapping("/addlist")
-    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyImageDto> propertyTypeDtos) {
+    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyImageDTO> propertyTypeDtos) {
         try {
             if (!propertyTypeDtos.isEmpty()) {
                 return CustomResponseHandler.generateResponse("Successfully saved the list!", HttpStatus.CREATED, service.addAll(mapstructMapper.propertyImageDtosToPropertyImages(propertyTypeDtos)));
@@ -78,7 +78,7 @@ public class PropertyImageController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> edit(@Valid @RequestBody PropertyImageDto propertyDto, @PathVariable Long id) {
+    public ResponseEntity<?> edit(@Valid @RequestBody PropertyImageDTO propertyDto, @PathVariable Long id) {
         Optional<PropertyImage> property = service.findById(id);
         if (!property.isPresent()) {
             return CustomResponseHandler.generateResponse("entity not found", HttpStatus.NOT_FOUND, null);

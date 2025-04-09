@@ -7,9 +7,11 @@ package com.rentoome.property.domain.mapper;
 import com.rentoome.property.domain.Property;
 import com.rentoome.property.domain.PropertyImage;
 import com.rentoome.property.domain.PropertyType;
-import com.rentoome.property.domain.dto.PropertyDto;
-import com.rentoome.property.domain.dto.PropertyImageDto;
-import com.rentoome.property.domain.dto.PropertyTypeDto;
+import com.rentoome.property.domain.Ville;
+import com.rentoome.property.domain.dto.PropertyDTO;
+import com.rentoome.property.domain.dto.PropertyImageDTO;
+import com.rentoome.property.domain.dto.PropertyTypeDTO;
+import com.rentoome.property.domain.dto.VilleDTO;
 import java.util.List;
 import org.mapstruct.Mapper;
 
@@ -27,13 +29,17 @@ public interface MapStructMapper {
      * @param propertyTypeDto
      * @return
      */
-    PropertyType propertyTypeDtoTopropertyType(PropertyTypeDto propertyTypeDto);
+    PropertyType propertyTypeDtoTopropertyType(PropertyTypeDTO propertyTypeDto);
 
-    List<PropertyType> propertyTypesDtoTopropertyTypes(List<PropertyTypeDto> propertyTypeDtos);
+    List<PropertyType> propertyTypesDtoTopropertyTypes(List<PropertyTypeDTO> propertyTypeDtos);
 
-    List<PropertyTypeDto> propertyTypesTopropertyTypeDtos(List<PropertyType> propertiesTypes);
+    List<PropertyTypeDTO> propertyTypesTopropertyTypeDtos(List<PropertyType> propertiesTypes);
 
-    PropertyTypeDto propertyTypeTopropertyTypeDto(PropertyType propertyType);
+    PropertyTypeDTO propertyTypeTopropertyTypeDto(PropertyType propertyType);
+
+    VilleDTO VilleToVilleDto(Ville ville);
+
+    List<VilleDTO> VilleToVilleDto(List<Ville> ville);
 
     /**
      *
@@ -41,20 +47,25 @@ public interface MapStructMapper {
      * @return
      */
     // Property class and DTO
-    Property propertyDtoToproperty(PropertyDto propertyDto);
+    Property propertyDtoToproperty(PropertyDTO propertyDto);
 
-    List<Property> propertiesDtoToproperties(List<PropertyDto> propertyDtos);
+    List<Property> propertiesDtoToproperties(List<PropertyDTO> propertyDtos);
 
-    List<PropertyDto> propertiesTopropertiesDto(List<Property> properties);
+    List<PropertyDTO> propertiesTopropertiesDto(List<Property> properties);
 
-    PropertyDto propertyTopropertyDto(Property property);
+    PropertyDTO propertyTopropertyDto(Property property);
 
     //PropertyImage class and DTO
-    PropertyImage propertyImageDtoTopropertyImage(PropertyImageDto propertyImageDto);
+    PropertyImage propertyImageDtoTopropertyImage(PropertyImageDTO propertyImageDto);
 
-    List<PropertyImage> propertyImageDtosToPropertyImages(List<PropertyImageDto> propertyImageDtos);
+    List<PropertyImage> propertyImageDtosToPropertyImages(List<PropertyImageDTO> propertyImageDtos);
 
-    List<PropertyImageDto> propertyImagesTopropertiesImageDtos(List<PropertyImage> propertyImages);
+    List<PropertyImageDTO> propertyImagesTopropertiesImageDtos(List<PropertyImage> propertyImages);
 
-    PropertyImageDto propertyImageTopropertyImageDto(PropertyImage propertyImage);
+    PropertyImageDTO propertyImageTopropertyImageDto(PropertyImage propertyImage);
+
+    Ville VilleDtoToVille(VilleDTO villeDto);
+
+    List<Ville> VilleDtosToVille(List<VilleDTO> villeDtos);
+
 }

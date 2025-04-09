@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PropertyImageDto {
+public class PropertyImageDTO {
 
     private Long id;
 

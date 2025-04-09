@@ -41,6 +41,6 @@ logging:
 #    org.springframework.boot.autoconfigure: DEBUG
 
 auth:
-    app:
-        jwtSecret: ======================BezKoder=Spring===========================
-        jwtExpirationMs: 86400000
+  app:
+    jwtSecret: d6633c8cc2599dd2ca54d0273bf9486186a6f51b745f7e5c84a720c0a2aab470cdbbc306bad14d1370100acb5c2b4ecb0dd0258de96e639c9444f2d20afbd652
+    jwtExpirationMs: 86400000

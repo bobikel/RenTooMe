@@ -4,8 +4,8 @@
  */
 package com.rentoome.property.service;
 
-import com.rentoome.property.domain.Property;
-import com.rentoome.property.repository.PropertyRepository;
+import com.rentoome.property.domain.Pays;
+import com.rentoome.property.repository.PaysRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +20,18 @@ import org.springframework.stereotype.Service;
  * @author DYNABOOK
  */
 @Service
-public class PropertyService implements AbstractCRUDService<Property, Long> {
+public class PaysService implements AbstractCRUDService<Pays, Long> {
 
     @Autowired
-    private PropertyRepository repository;
+    private PaysRepository repository;
 
     @Override
-    public Property add(Property entity) {
+    public Pays add(Pays entity) {
         return repository.save(entity);
     }
 
     @Override
-    public Property edit(Property entity) {
+    public Pays edit(Pays entity) {
         return repository.save(entity);
     }
 
@@ -41,32 +41,32 @@ public class PropertyService implements AbstractCRUDService<Property, Long> {
     }
 
     @Override
-    public List<Property> findAll() {
+    public List<Pays> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Property> findById(Long id) {
+    public Optional<Pays> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Property> addAll(List<Property> entities) {
+    public List<Pays> addAll(List<Pays> entities) {
         return repository.saveAll(entities);
     }
 
     @Override
-    public Page<Property> getAllPageable() {
-//    public Page<Property> getAllPageable() {
+    public Page<Pays> getAllPageable() {
+//    public Page<Pays> getAllPageable() {
 
 //        Pageable pageRequest = createPageRequestUsing(page, size);
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
-        Page<Property> allPropertys = repository.findAll(Pageable.unpaged(sort));
+        Page<Pays> allPayss = repository.findAll(Pageable.unpaged(sort));
 //        int start = (int) pageRequest.getOffset();
-//        int end = Math.min((start + pageRequest.getPageSize()), allPropertys);
+//        int end = Math.min((start + pageRequest.getPageSize()), allPayss);
 
-//        List<Property> pageContent = allPropertys.subList(start, end);
-        return allPropertys;
+//        List<Pays> pageContent = allPayss.subList(start, end);
+        return allPayss;
     }
 
     private Pageable createPageRequestUsing(int page, int size) {

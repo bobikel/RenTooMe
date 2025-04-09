@@ -21,4 +21,3 @@ eureka:
 
 server:
   port: 8781
-

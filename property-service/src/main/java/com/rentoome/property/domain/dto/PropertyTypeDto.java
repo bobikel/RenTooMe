@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PropertyTypeDto {
+public class PropertyTypeDTO {
 
     @JsonProperty("id")
     private Long id;

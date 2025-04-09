@@ -4,7 +4,7 @@
  */
 package com.rentoome.property.repository;
 
-import com.rentoome.property.domain.PropertyImage;
+import com.rentoome.property.domain.Quartier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
@@ -14,6 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author DYNABOOK
  */
 @Repository
-public interface PropertyImageRepository extends JpaRepository<PropertyImage, Long>, JpaSpecificationExecutor<PropertyImage> {
+public interface QuartierRepository extends JpaRepository<Quartier, Long>, JpaSpecificationExecutor<Quartier> {
     
 }

@@ -1,78 +1,43 @@
 package com.rentoome.auth.security;
 
-import com.rentoome.auth.service.UtilisateurService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.rentoome.auth.domain.Role;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    UtilisateurService userDetailsService;
-
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
-
-    public SecurityConfig(UtilisateurService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    private final JwtAuthenticationFilter jwtAuthFilter;
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
-        authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(userDetailsService.passwordEncoder());
-
-        return authProvider;
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**");
-    }
-    
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
-                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth
-                        -> auth
-                        .requestMatchers("/api/v1/auth/signin", "/api/v1/auth/signup").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**").permitAll()
-                        .anyRequest().authenticated()
-                );
-
-        http.authenticationProvider(authenticationProvider());
-//        http.csrf((csrf) -> csrf.ignoringRequestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs", "/webjars/**"));
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(request -> request.requestMatchers(
+                "/api/v1/auth-service/**", // Your specific API access,
+                "/v3/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/webjars/**")
+                .permitAll()
+                .requestMatchers("/api/v1/admin/**").hasAuthority("admin")
+                .requestMatchers("/api/v1/user/**").hasAnyAuthority("user", "admin")
+                .anyRequest().authenticated())
+                .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
-
 }

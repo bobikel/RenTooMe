@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LeaseContractDto {
+public class LeaseContractDTO {
 
     private Long id;
 

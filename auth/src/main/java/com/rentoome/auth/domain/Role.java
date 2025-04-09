@@ -3,6 +3,8 @@ package com.rentoome.auth.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +12,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Table
 @Getter
@@ -43,5 +49,22 @@ public class Role {
             = @JoinColumn(name = "PRIVILEGE_ID", referencedColumnName = "ID")
     )
     @JsonIgnore
-    private Set<Privilege> privileges;
+    private List<Privilege> privileges;
+
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedBy
+    private String lastUpdatedBy;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime lastUpdatedAt;
+
+    private boolean isEnabled;
+
+    private boolean isDeleted;
+
 }

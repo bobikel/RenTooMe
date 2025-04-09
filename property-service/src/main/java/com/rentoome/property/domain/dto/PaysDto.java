@@ -14,23 +14,15 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PropertyDto {
+public class PaysDTO {
 
     private Long id;
 
     @NonNull
     private String libelle;
 
+    private String code;
+
     private String description;
 
-    private String adresse;
-
-    @NonNull
-    private String occupationStatut;
-
-    @NonNull
-    private Long propertyTypeId;
-
-//    @NonNull
-//    private PropertyTypeDto propertyTypeDto;
 }

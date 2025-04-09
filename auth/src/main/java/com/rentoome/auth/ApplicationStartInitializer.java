@@ -6,12 +6,15 @@ package com.rentoome.auth;
 
 import com.rentoome.auth.domain.Privilege;
 import com.rentoome.auth.domain.Role;
+import com.rentoome.auth.domain.Utilisateur;
 import com.rentoome.auth.service.PrivilegeService;
 import com.rentoome.auth.service.RoleService;
+import com.rentoome.auth.service.UtilisateurService;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -22,12 +25,18 @@ import org.springframework.stereotype.Component;
 public class ApplicationStartInitializer implements CommandLineRunner {
 
     @Autowired
+    private UtilisateurService UtilisateurService;
+
+    @Autowired
     private RoleService roleService;
 
     @Autowired
     private PrivilegeService privilegeService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    public ApplicationStartInitializer(RoleService roleService, PrivilegeService privilegeService) {
+    public ApplicationStartInitializer(RoleService roleService, PrivilegeService privilegeService, UtilisateurService UtilisateurService) {
         this.roleService = roleService;
         this.privilegeService = privilegeService;
     }
@@ -48,8 +57,24 @@ public class ApplicationStartInitializer implements CommandLineRunner {
             r.setDescription("Role de base pour les utilisateurs qui s'inscrivent à la plate-forme");
             Set<Privilege> privileges = new HashSet<>();
             privileges.add(privilegeService.findAll().getFirst());
-            r.setPrivileges(privileges);
+//            r.setPrivileges(privileges);
             roleService.add(r);
+        }
+
+        if (UtilisateurService.findAll().isEmpty()) {
+            Utilisateur u = new Utilisateur();
+            u.setFirstName("Boris");
+            u.setEmail("manbikboris@gmail.com");
+            u.setUsername("bobikel");
+            u.setPassword(passwordEncoder.encode("bobikel"));
+            u.setSex("m");
+            u.setEnabled(true);
+            u.setAccountexpired(false);
+            u.setCredentialsNonExpired(true);
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleService.findAll().getFirst());
+            u.setRoles(roles);
+            UtilisateurService.add(u);
         }
     }
 

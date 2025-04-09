@@ -4,12 +4,11 @@
  */
 package com.rentoome.property.controller;
 
-import com.rentoome.property.domain.PropertyImage;
-import com.rentoome.property.domain.dto.PropertyImageDto;
+import com.rentoome.property.domain.Ville;
+import com.rentoome.property.domain.dto.VilleDTO;
 import com.rentoome.property.domain.mapper.MapStructMapper;
-import com.rentoome.property.service.PropertyImageService;
+import com.rentoome.property.service.VilleService;
 import com.rentoome.property.utils.CustomResponseHandler;
-import com.rentoome.utils.CustomMessage;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -33,14 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/property-service/pimages")
 @CrossOrigin("*")
-public class PropertyImageController {
+public class VilleController {
 
     @Autowired
-    private PropertyImageService service;
+    private VilleService service;
 
     private MapStructMapper mapstructMapper;
 
-    public PropertyImageController(MapStructMapper mapstructMapper, PropertyImageService service) {
+    public VilleController(MapStructMapper mapstructMapper, VilleService service) {
         this.mapstructMapper = mapstructMapper;
         this.service = service;
     }
@@ -56,19 +55,19 @@ public class PropertyImageController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody PropertyImageDto propertyDto) {
+    public ResponseEntity<?> add(@Valid @RequestBody VilleDTO propertyDTO) {
         try {
-            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.add(mapstructMapper.propertyImageDtoTopropertyImage(propertyDto)));
+            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.add(mapstructMapper.VilleDtoToVille(propertyDTO)));
         } catch (Exception e) {
             return CustomResponseHandler.generateResponse(e.getMessage(), HttpStatus.CONFLICT, null);
         }
     }
 
     @PostMapping("/addlist")
-    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyImageDto> propertyTypeDtos) {
+    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<VilleDTO> propertyTypeDTOs) {
         try {
-            if (!propertyTypeDtos.isEmpty()) {
-                return CustomResponseHandler.generateResponse("Successfully saved the list!", HttpStatus.CREATED, service.addAll(mapstructMapper.propertyImageDtosToPropertyImages(propertyTypeDtos)));
+            if (!propertyTypeDTOs.isEmpty()) {
+                return CustomResponseHandler.generateResponse("Successfully saved the list!", HttpStatus.CREATED, service.addAll(mapstructMapper.VilleDtosToVille(propertyTypeDTOs)));
             } else {
                 return CustomResponseHandler.generateResponse("Error!!!", HttpStatus.NO_CONTENT, null);
             }
@@ -78,18 +77,18 @@ public class PropertyImageController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> edit(@Valid @RequestBody PropertyImageDto propertyDto, @PathVariable Long id) {
-        Optional<PropertyImage> property = service.findById(id);
+    public ResponseEntity<?> edit(@Valid @RequestBody VilleDTO propertyDTO, @PathVariable Long id) {
+        Optional<Ville> property = service.findById(id);
         if (!property.isPresent()) {
             return CustomResponseHandler.generateResponse("entity not found", HttpStatus.NOT_FOUND, null);
         } else {
-            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.edit(mapstructMapper.propertyImageDtoTopropertyImage(propertyDto)));
+            return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.edit(mapstructMapper.VilleDtoToVille(propertyDTO)));
         }
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        Optional<PropertyImage> property = service.findById(id);
+        Optional<Ville> property = service.findById(id);
         if (!property.isPresent()) {
             return CustomResponseHandler.generateResponse("entity not found", HttpStatus.NOT_FOUND, null);
         } else {

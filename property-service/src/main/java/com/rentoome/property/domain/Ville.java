@@ -4,23 +4,25 @@
  */
 package com.rentoome.property.domain;
 
-import com.rentoome.property.domain.enums.OccupationStatut;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
@@ -34,7 +36,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Property extends AbstractEntity {
+public class Ville extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,14 +47,23 @@ public class Property extends AbstractEntity {
 
     private String description;
 
-    private String adresse;
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Pays.class, cascade = CascadeType.ALL)
+    private Pays pays;
 
-    @Enumerated(EnumType.STRING)
-    @NonNull
-    private OccupationStatut occupationStatut;
+    @CreatedBy
+    private String createdBy;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = PropertyType.class, cascade = CascadeType.ALL)
-    @NonNull
-    private PropertyType propertyType;
+    @LastModifiedBy
+    private String lastUpdatedBy;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime lastUpdatedAt;
+
+    private boolean isEnabled;
+
+    private boolean isDeleted;
 
 }

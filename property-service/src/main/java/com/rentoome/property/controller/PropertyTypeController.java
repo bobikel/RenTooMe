@@ -5,7 +5,7 @@
 package com.rentoome.property.controller;
 
 import com.rentoome.property.domain.PropertyType;
-import com.rentoome.property.domain.dto.PropertyTypeDto;
+import com.rentoome.property.domain.dto.PropertyTypeDTO;
 import com.rentoome.property.domain.mapper.MapStructMapper;
 import com.rentoome.property.service.PropertyTypeService;
 import com.rentoome.property.utils.CustomResponseHandler;
@@ -56,7 +56,7 @@ public class PropertyTypeController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@Valid @RequestBody PropertyTypeDto propertyDto) {
+    public ResponseEntity<?> add(@Valid @RequestBody PropertyTypeDTO propertyDto) {
         try {
             System.out.println("ici l'enregistrement : " + mapstructMapper.propertyTypeDtoTopropertyType(propertyDto));
             return CustomResponseHandler.generateResponse("Successfully saved!", HttpStatus.CREATED, service.add(mapstructMapper.propertyTypeDtoTopropertyType(propertyDto)));
@@ -66,7 +66,7 @@ public class PropertyTypeController {
     }
 
     @PostMapping("/addlist")
-    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyTypeDto> propertyTypeDtos) {
+    public ResponseEntity<?> addMultiple(@Valid @RequestBody List<PropertyTypeDTO> propertyTypeDtos) {
         try {
             if (!propertyTypeDtos.isEmpty()) {
                 return CustomResponseHandler.generateResponse("Successfully saved the list!", HttpStatus.CREATED, service.addAll(mapstructMapper.propertyTypesDtoTopropertyTypes(propertyTypeDtos)));
@@ -79,7 +79,7 @@ public class PropertyTypeController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> edit(@Valid @RequestBody PropertyTypeDto propertyDto, @PathVariable Long id) {
+    public ResponseEntity<?> edit(@Valid @RequestBody PropertyTypeDTO propertyDto, @PathVariable Long id) {
         Optional<PropertyType> property = service.findById(id);
         if (!property.isPresent()) {
             return CustomResponseHandler.generateResponse("entity not found", HttpStatus.NOT_FOUND, null);
