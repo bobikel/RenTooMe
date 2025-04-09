@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, RouterModule, RouterOutlet } from '@angular/router';
+import { Event, RouterEvent, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,21 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'rentoome-frontend';
+  loading = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.loading = true;
+      } else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel ||
+        event instanceof NavigationError
+      ) {
+        this.loading = false;
+      }
+    });
+  }
 }
+
+
