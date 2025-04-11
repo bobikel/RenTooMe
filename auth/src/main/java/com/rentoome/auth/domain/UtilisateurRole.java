@@ -1,5 +1,6 @@
 package com.rentoome.auth.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Setter
-public class UtilisateurRole {
+public class UtilisateurRole implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Long utilisateurId;
     private Long roleId;

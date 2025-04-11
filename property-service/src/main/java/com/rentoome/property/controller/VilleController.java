@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author DYNABOOK
  */
 @RestController
-@RequestMapping("/api/v1/property-service/pimages")
+@RequestMapping("/api/v1/property-service/towns")
 @CrossOrigin("*")
 public class VilleController {
 

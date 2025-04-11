@@ -3,6 +3,7 @@ package com.rentoome.auth.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Setter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Privilege {
+public class Privilege implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

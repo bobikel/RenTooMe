@@ -31,6 +31,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 public class Utilisateur extends AbstractEntity implements UserDetails {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -57,7 +59,7 @@ public class Utilisateur extends AbstractEntity implements UserDetails {
 
     private boolean accountexpired;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "UTILISATEUR_ROLE",
             joinColumns
             = @JoinColumn(name = "UTILISATEUR_ID", referencedColumnName = "ID"),
